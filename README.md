@@ -16,7 +16,9 @@ Development of properties expressed in a similar way is in progress, enabling ea
 
 Use the following update site address in "Help->Install New Software" menu of a recent eclipse : https://yanntm.github.io/HUPN-HumanUsablePetriNotation/
 
-You can then right-click a PNML file and ask to generate a HUPN representation.
+You can then right-click a PNML file and ask to generate a HUPN representation, or right click a ".hupn" file to generate PNML.
+
+Of course you can also simply create a high level Petri net model in any file with the extension `.hupn`
 
 ## Example
 
