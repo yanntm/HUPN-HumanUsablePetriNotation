@@ -42,8 +42,7 @@ Workflow {
 			
 			junitSupport = {
 				junitVersion = "5"
-			}
-			fragment = formatting.Formatter2Fragment2 {}
+			}			
 			
 			fragment = exporting.SimpleNamesFragment2 {}		
 		}
