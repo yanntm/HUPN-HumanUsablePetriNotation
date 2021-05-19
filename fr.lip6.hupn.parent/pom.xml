@@ -25,6 +25,8 @@
 		<module>fr.lip6.hupn.ide</module>
 		<module>fr.lip6.hupn.ui</module>
 		<module>fr.lip6.hupn.target</module>
+		<module>fr.lip6.hupn.feature</module>
+		<module>fr.lip6.hupn.updatesite</module>
 	</modules>
 	<dependencyManagement>
 		<dependencies>

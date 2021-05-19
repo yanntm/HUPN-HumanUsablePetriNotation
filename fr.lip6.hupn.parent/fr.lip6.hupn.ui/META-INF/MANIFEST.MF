@@ -21,4 +21,4 @@ Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: fr.lip6.hupn.ui.internal,
  fr.lip6.hupn.ui.contentassist,
  fr.lip6.hupn.ui.quickfix
-Bundle-Activator: fr.lip6.hupn.ui.internal.HlpnActivator
+Bundle-Activator: fr.lip6.hupn.ui.internal.HupnActivator
