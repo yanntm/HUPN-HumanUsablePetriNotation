@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            id="PNMLToHUPN.contribution1"
+            nameFilter="*.pnml"
+            objectClass="org.eclipse.core.resources.IFile">
+         <menu
+               label="PNML Actions"
+               path="additions"
+               id="PNMLToHUPN.menu1">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+         <action
+               class="fr.lip6.move.gal.pnml.togal.popup.actions.ImportFromPNMLToGAL"
+               enablesFor="+"
+               id="PNMLToGAL.newAction"
+               label="Import To HUPN"
+               menubarPath="PNMLToGAL.menu1/group1"
+               style="radio">
+         </action>
+      </objectContribution>
+   </extension>
+
+</plugin>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="hUPN" nsURI="http://www.lip6.fr/hupn/HUPN" nsPrefix="hUPN">
+  <eClassifiers xsi:type="ecore:EClass" name="PetriNet">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sorts" upperBound="-1"
+        eType="#//Sort" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="places" upperBound="-1"
+        eType="#//Place" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="vars" upperBound="-1" eType="#//VarDef"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transitions" upperBound="-1"
+        eType="#//Transition" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PnObject">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Place" eSuperTypes="#//PnObject">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sort" eType="#//Sort"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initial" eType="#//TokenExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Transition" eSuperTypes="#//PnObject">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="guard" eType="#//BooleanExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="preArcs" upperBound="-1"
+        eType="#//Arc" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="postArcs" upperBound="-1"
+        eType="#//Arc" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VarDef">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//Sort"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ComparisonOperators">
+    <eLiterals name="GT" literal=">"/>
+    <eLiterals name="LT" value="1" literal="&lt;"/>
+    <eLiterals name="GE" value="2" literal=">="/>
+    <eLiterals name="LE" value="3" literal="&lt;="/>
+    <eLiterals name="EQ" value="4" literal="=="/>
+    <eLiterals name="NE" value="5" literal="!="/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="BinaryOperators">
+    <eLiterals name="ADD" literal="+"/>
+    <eLiterals name="MINUS" value="1" literal="-"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BooleanExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Comparison" eSuperTypes="#//BooleanExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//CFunc"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//ComparisonOperators"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//CFunc"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CFunc"/>
+  <eClassifiers xsi:type="ecore:EClass" name="True" eSuperTypes="#//BooleanExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="False" eSuperTypes="#//BooleanExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Arc">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="place" eType="#//Place"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="func" eType="#//TokenExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TokenExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Multiplier">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mult" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VarRef" eSuperTypes="#//CFunc">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="var" eType="#//VarDef"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Succ" eSuperTypes="#//CFunc">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="var" eType="#//VarDef"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Pred" eSuperTypes="#//CFunc">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="var" eType="#//VarDef"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Sort">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="def" eType="#//SortDefinition"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SortDefinition"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Enumeration" eSuperTypes="#//SortDefinition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
+        eType="#//SortElement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SortElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FiniteIntRange" eSuperTypes="#//SortDefinition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="min" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="max" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RefSort">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sort" eType="#//Sort"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ProductSort" eSuperTypes="#//SortDefinition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sorts" upperBound="-1"
+        eType="#//RefSort" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Or" eSuperTypes="#//BooleanExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//BooleanExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//BooleanExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="And" eSuperTypes="#//BooleanExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//BooleanExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//BooleanExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Not" eSuperTypes="#//BooleanExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//BooleanExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BinaryTokenExpression" eSuperTypes="#//TokenExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//TokenExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="op" eType="#//BinaryOperators"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//TokenExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Token" eSuperTypes="#//TokenExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mult" eType="#//Multiplier"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tuple" upperBound="-1"
+        eType="#//CFunc" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BinaryCFunc" eSuperTypes="#//CFunc">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//CFunc"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="op" eType="#//BinaryOperators"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//CFunc"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ElementRef" eSuperTypes="#//CFunc">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="element" eType="#//SortElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AllRef" eSuperTypes="#//CFunc"/>
+</ecore:EPackage>

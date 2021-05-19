@@ -1,0 +1,255 @@
+grammar fr.lip6.hupn.HUPN with org.eclipse.xtext.common.Terminals
+
+generate hUPN "http://www.lip6.fr/hupn/HUPN"
+
+PetriNet :
+	'net' name=IDD '{'
+	 (
+	 	sorts+=Sort
+	 	| places+=Place
+	 	| vars+=VarDef 
+	 	| transitions+=Transition	 	
+	 )*
+	 '}' 		
+;
+
+PnObject : Place | Transition;
+
+Place:
+	'place' name=IDD 
+	'sort' sort=[Sort]
+	('initial' initial=BinaryTokenExpression)?
+	';'
+;
+
+Transition:
+	'transition' name=IDD 
+	'[' guard=Or ']'
+	'{'
+	(('pre' preArcs+=Arc ';')|
+	('post' postArcs+=Arc ';'))*
+	'}'
+;
+
+VarDef:
+	'var' type=[Sort] name=PARAMNAME ';'
+;
+
+
+/* =====   Boolean expressions ===== */
+enum ComparisonOperators:
+	GT='>'  // Greater Than
+	| LT='<' // Lower Than
+	| GE='>=' // Greater or Equal
+	| LE='<=' // Lower or Equal
+	| EQ='==' // Equal
+	| NE='!='; // Not Equal
+
+enum BinaryOperators :
+	ADD='+'
+	| MINUS='-'
+;
+	
+Or returns BooleanExpression:
+	(And ({Or.left=current} ->'||' right=And)*);
+
+And returns BooleanExpression:
+	Not ({And.left=current} ->'&&' right=Not)*;
+
+Not returns BooleanExpression:
+	(->'!' {Not} value=PrimaryBool) | PrimaryBool;
+
+PrimaryBool returns BooleanExpression:
+	True | False | => Comparison | ('(' Or ')');
+
+Comparison:
+	(left=PrimaryGuard
+	->operator=ComparisonOperators
+	right=PrimaryGuard);
+
+PrimaryGuard returns CFunc:
+	VarRef | ElementRef	
+	;
+
+True:
+	{True}
+	'true'
+;
+
+False:
+	{False}
+	'false'
+;
+
+Arc:
+	place=[Place] func=ABinaryTokenExpression
+;
+
+//TokenExpression : BinaryTokenExpression | Token;
+//
+//BinaryTokenExpressionDef returns BinaryTokenExpression:
+//	left=TokenExpression
+//	op=BinaryOperators
+//	right=TokenExpression
+//;
+//
+//TokenDef returns Token :
+//	 mult=INT
+//	 '`'
+//	 '<' tuple+=CFunc ( ',' tuple+=CFunc)* '>'
+//;
+
+CFunc :
+	BinaryCFunc | ElementRef | AllRef | VarRef
+; 
+
+BinaryTokenExpression returns TokenExpression:
+	Token ({BinaryTokenExpression.left=current} op=BinaryOperators right=Token)*;
+
+Token returns TokenExpression:
+	{Token}
+	( mult=Multiplier '`' )?	
+	'<' tuple+=BinaryCFunc ( ',' tuple+=BinaryCFunc)* '>'
+;
+
+BinaryCFunc returns CFunc:
+	Primary ({BinaryCFunc.left=current} op=BinaryOperators right=Primary)*;
+
+
+Primary returns CFunc:
+	ElementRef |
+	AllRef ;
+
+
+ABinaryTokenExpression returns TokenExpression:
+	AToken ({BinaryTokenExpression.left=current} op=BinaryOperators right=AToken)*;
+
+AToken returns TokenExpression:
+	{Token}
+	( mult=Multiplier '`' )?	
+	'<' tuple+=ABinaryCFunc ( ',' tuple+=ABinaryCFunc)* '>'
+;
+
+Multiplier :
+	mult=INT
+;
+
+ABinaryCFunc returns CFunc:
+	APrimary ({BinaryCFunc.left=current} op=BinaryOperators right=APrimary)*;
+
+
+APrimary returns CFunc:
+	ElementRef |
+	AllRef |
+	VarRef |
+	Succ |
+	Pred
+	;
+
+
+// with variables
+//ABinaryTokenExpression returns BinaryTokenExpression:
+//	AToken ({BinaryTokenExpression.left=current} op=BinaryOperators right=AToken)*;
+//
+//AToken returns Token:
+//	( mult=INT '`' )?	
+//	'<' tuple+=ABinaryCFunc ( ',' tuple+=ABinaryCFunc)* '>'
+//;
+//
+//ABinaryCFunc returns CFunc:
+//	APrimary ({BinaryCFunc.left=current} op=BinaryOperators right=APrimary)*;
+//
+//
+//APrimary returns CFunc:
+//	ElementRef |
+//	AllRef |
+//	ParamRef
+//	;
+
+
+
+//tokens+=Token
+//	('+' tokens+=Token)*)?
+//
+
+
+//Func : 
+//	ParamRef | ElementRef | AllRef | IntRef
+//;
+
+VarRef :
+	var=[VarDef|PARAMNAME]
+;
+
+Succ :
+	var=[VarDef|PARAMNAME] '++'
+;
+
+Pred :
+	var=[VarDef|PARAMNAME] '--'
+;
+
+
+ElementRef returns CFunc :
+	{ElementRef}
+	element=[SortElement]
+;
+
+//IntRef :
+//	elt=INT
+//;
+
+AllRef returns CFunc :
+	{AllRef}
+	ALLKW
+;
+	
+Sort :
+	'sort' name=IDD 'is' def=SortDefinition ';'
+;
+
+SortDefinition :	
+	Enumeration | FiniteIntRange | ProductSort  // | BoolSort | DotSort
+;
+
+Enumeration:
+	'{'
+	elements+=SortElement
+	(',' elements+=SortElement)*
+	'}'
+;
+
+SortElement :
+	name=IDD	
+;
+
+FiniteIntRange :
+	min=INT '..' max=INT
+;
+
+
+// Due to bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=89325
+// we need an indirection in the MM
+RefSort :
+	sort=[Sort]
+;
+
+ProductSort :
+	sorts+=RefSort
+	'x' sorts+=RefSort
+	('x' sorts+=RefSort)*
+;
+
+// BoolSort : {BoolSort} 'Boolean' ;
+// DotSort : {DotSort} 'Dot' ;
+
+ALLKW :
+	'all'
+;
+
+IDD : ID | STRING | 'x' | ALLKW | 'is' | 'sort' | 'place' | 'transition' | 'net' | 'false' | 'true' ;
+
+terminal PARAMNAME:
+	'$'  ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+
+
