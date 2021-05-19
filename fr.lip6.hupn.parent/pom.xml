@@ -333,6 +333,13 @@
 			<url>https://lip6.github.io/pnmlframework/</url> 
 		</repository>
 
+  	    <repository>
+			<id>GAL updates</id>
+			<layout>p2</layout>
+			<url>https://lip6.github.io/ITSTools/</url> 
+		</repository>
+
+
 		<repository>
 			<id>asm</id>
 			<layout>p2</layout>
