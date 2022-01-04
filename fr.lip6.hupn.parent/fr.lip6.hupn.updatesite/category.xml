@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <description name="PSTL Projects Update Site" url="http://coloane.lip6.fr/incubation-updates">
+   <description name="Update Site for HUPN" url="https://yanntm.github.io/HUPN-HumanUsablePetriNotation/">
       GAL Incubation Updates Site
    </description>
-   <category-def name="HUPN" label="Human Usable textutal Petri notation">
+   <feature id="fr.lip6.hupn.feature">
+      <category name="HUPN"/>
+   </feature>
+   <category-def name="HUPN" label="Human Usable textual Petri notation">
       <description>
          HUPN editor and exchange with standard PNML.
       </description>
