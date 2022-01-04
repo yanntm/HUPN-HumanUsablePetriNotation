@@ -316,7 +316,6 @@ This Agreement is governed by the laws of the State of New York and the intellec
       <import plugin="org.eclipse.xtext.xbase.ide"/>      
       <import plugin="org.eclipse.ui"/>
       <import plugin="org.eclipse.core.resources"/>
-      <import plugin="fr.lip6.move.gal.nupn"/>
       <import plugin="org.eclipse.xtext.ui"/>
       <import plugin="org.eclipse.xtext.ui.shared"/>
       <import plugin="org.eclipse.xtext.ui.codetemplates.ui"/>
@@ -384,6 +383,13 @@ This Agreement is governed by the laws of the State of New York and the intellec
     
     <plugin
          id="fr.lip6.move.gal.pnml.saxparse"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+      
+    <plugin
+         id="fr.lip6.move.gal.nupn"
          download-size="0"
          install-size="0"
          version="0.0.0"
