@@ -26,7 +26,7 @@ jobs:
          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
          restore-keys: ${{ runner.os }}-m2
     - name: Build with Maven
-      run: cd fr.lip6.hupn.parent && mvn -T 4 -e generate-sources install && cd -
+      run: cd fr.lip6.hupn.parent && mvn -T 4 -e generate-sources install && cd - && cp fr.lip6.hupn.parent/fr.lip6.hupn.updatesite/index.html fr.lip6.hupn.parent/fr.lip6.hupn.updatesite/target/repository/index.html
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@4.1.8
       with:
