@@ -21,8 +21,8 @@
                enablesFor="+"
                id="PNMLToGAL.newAction"
                label="Import To HUPN"
-               menubarPath="PNMLToGAL.menu1/group1"
-               style="radio">
+               menubarPath="PNMLToHUPN.menu1"
+               style="button">
          </action>
       </objectContribution>
    </extension>
