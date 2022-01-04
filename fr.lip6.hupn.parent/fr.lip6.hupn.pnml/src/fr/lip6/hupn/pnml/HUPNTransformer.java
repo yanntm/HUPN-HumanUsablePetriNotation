@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -37,6 +38,7 @@ import fr.lip6.move.pnml.symmetricnet.booleans.Not;
 import fr.lip6.move.pnml.symmetricnet.cyclicEnumerations.Predecessor;
 import fr.lip6.move.pnml.symmetricnet.cyclicEnumerations.Successor;
 import fr.lip6.move.pnml.symmetricnet.dots.Dot;
+import fr.lip6.move.pnml.symmetricnet.dots.DotConstant;
 import fr.lip6.move.pnml.symmetricnet.finiteEnumerations.FEConstant;
 import fr.lip6.move.pnml.symmetricnet.finiteEnumerations.FiniteEnumeration;
 import fr.lip6.move.pnml.symmetricnet.finiteIntRanges.FiniteIntRange;
@@ -664,6 +666,16 @@ public class HUPNTransformer {
 			int index = Math.toIntExact(firc.getValue() - firc.getRange().getStart());
 			cte.setElement(((Enumeration) sortMap.get(firc.getSort())).getElements().get(index));
 			return cte;
+		} else if (g instanceof DotConstant) {
+			DotConstant dc = (DotConstant) g;			
+			ElementRef cte = HUPNFactory.eINSTANCE.createElementRef();
+			// find the DotConstant
+			for (Entry<fr.lip6.move.pnml.symmetricnet.terms.Sort, Sort> e : sortMap.entrySet()) {
+				if (e.getKey() instanceof Dot) {
+					cte.setElement(((Enumeration) e.getValue().getDef()).getElements().get(0));					
+					return cte;
+				}
+			}
 		} else {
 			getLog().warning("Unknown arithmetic term or operator :" + g.getClass().getName());
 		}
