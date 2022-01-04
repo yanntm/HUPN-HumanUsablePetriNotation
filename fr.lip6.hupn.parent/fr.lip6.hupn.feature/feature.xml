@@ -313,7 +313,7 @@ This Agreement is governed by the laws of the State of New York and the intellec
       <import plugin="org.antlr.runtime"/>
       <import plugin="org.apache.log4j"/>
       <import plugin="org.eclipse.xtext.ide"/>
-      <import plugin="org.eclipse.xtext.xbase.ide"/>      
+      <import plugin="org.eclipse.xtext.xbase.ide"/>
       <import plugin="org.eclipse.ui"/>
       <import plugin="org.eclipse.core.resources"/>
       <import plugin="org.eclipse.xtext.ui"/>
@@ -359,54 +359,5 @@ This Agreement is governed by the laws of the State of New York and the intellec
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
-	<plugin
-         id="fr.lip6.pnml.framework.ptnet"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-         
-    <plugin
-         id="fr.lip6.pnml.framework.symmetricnet"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-    
-    <plugin
-         id="fr.lip6.pnml.framework.utils"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-    
-    <plugin
-         id="fr.lip6.move.gal.pnml.saxparse"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-      
-    <plugin
-         id="fr.lip6.move.gal.nupn"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-         
-    <plugin
-         id="fr.lip6.move.gal"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>         
-
-    <plugin
-         id="fr.lip6.pnml.framework.3rdpartimports"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>         
 
 </feature>
