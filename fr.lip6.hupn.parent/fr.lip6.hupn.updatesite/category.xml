@@ -11,4 +11,6 @@
          HUPN editor and exchange with standard PNML.
       </description>
    </category-def>
+   <repository-reference location="http://https://lip6.github.io/ITSTools/" enabled="true" />
+   <repository-reference location="http://https://lip6.github.io/pnmlframework/" enabled="true" />
 </site>
