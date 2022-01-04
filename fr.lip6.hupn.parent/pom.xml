@@ -16,14 +16,14 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<junit-version>4.8.1</junit-version>
 		<eclipse-site>http://download.eclipse.org/releases/${platform-version-name}</eclipse-site>
-		<!-- EDIT THIS ORBIT SITE FOR NEXT RELEASE : this is 2020-06 -->
-		<orbit-site>http://download.eclipse.org/tools/orbit/downloads/drops/R20210223232630/repository/</orbit-site>
-		<platform-version-name>2021-03</platform-version-name>
-		<tycho-version>2.0.0</tycho-version>
+		<!-- EDIT THIS ORBIT SITE FOR NEXT RELEASE : this is 2021-12 -->
+		<orbit-site>http://download.eclipse.org/tools/orbit/downloads/drops/R20211213173813/repository/</orbit-site>
+		<platform-version-name>2021-12</platform-version-name>
+		<tycho-version>2.5.0</tycho-version>
 		<sonar.exclusions>**/Messages.java</sonar.exclusions>
-		<xtextVersion>2.25.0</xtextVersion>
-		<xtendVersion>2.25.0</xtendVersion>
-		<mwe2Version>2.12.1</mwe2Version>
+		<xtextVersion>2.26.0.M2</xtextVersion>
+		<xtendVersion>2.26.0.M2</xtendVersion>
+		<mwe2Version>2.12.2.M1</mwe2Version>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
@@ -172,7 +172,7 @@
 				</plugin>
 				<plugin>
 					<artifactId>maven-release-plugin</artifactId>
-					<version>3.0.0-M1</version>
+					<version>3.0.0-M4</version>
 					<configuration>
 						<preparationGoals>clean -DnewVersion=${releaseVersion}
 							-Dprudent=true
