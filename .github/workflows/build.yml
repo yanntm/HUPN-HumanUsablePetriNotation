@@ -28,7 +28,7 @@ jobs:
     - name: Build with Maven
       run: cd fr.lip6.hupn.parent && mvn -T 4 -e generate-sources install && cd - && cp fr.lip6.hupn.parent/fr.lip6.hupn.updatesite/index.html fr.lip6.hupn.parent/fr.lip6.hupn.updatesite/target/repository/index.html
     - name: Deploy to GitHub Pages
-      uses: JamesIves/github-pages-deploy-action@v4.2.2
+      uses: JamesIves/github-pages-deploy-action@v4.2.5
       with:
           branch: gh-pages # The branch the action should deploy to.
           folder: fr.lip6.hupn.parent/fr.lip6.hupn.updatesite/target/repository # The folder the action should deploy.
